@@ -27,8 +27,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(600, 200);
-
+  createCanvas(windowWidth, windowHeight);
+console.log("width = "+ width)
+  
   trex = createSprite(70, 190, 20, 20);
   trex.debug = true;
   trex.addAnimation("Ronak", trexRun);
@@ -52,12 +53,12 @@ function setup() {
   cactusGroup = new Group();
   cloudGroup = createGroup();
 
-  restart = createSprite(300,100,20,20);
+  restart = createSprite(width/2,height/2,20,20);
   restart.addImage(restart1);
   restart.scale = 0.5;
   restart.visible = false;
   
-  gameover = createSprite(300,60,20,20);
+  gameover = createSprite(width/2,height/3+50,20,20);
   gameover.addImage(gameover1);
   gameover.scale = 0.5;
   gameover.visible = false;
@@ -83,7 +84,7 @@ function draw() {
 
 
 
-  console.log(frameCount, score);
+  //console.log(frameCount, score);
 
   text("score = " + score, 520, 50)
 
@@ -150,25 +151,25 @@ function clouds() {
 
 
 
-  var clouds1 = createSprite(600, random(5, 100), 20, 20);
+  var clouds1 = createSprite(width, random(5, 100), 20, 20);
   clouds1.velocityX = -5;
   clouds1.addImage(cloud)
   clouds1.scale = 0.8
   //console.log(trex.depth, clouds1.depth)
   clouds1.depth = trex.depth
   trex.depth = trex.depth + 1
-  clouds1.lifetime = 120
+  clouds1.lifetime = width/5;
   cloudGroup.add(clouds1);
    
 }
 
 function cactus() {
 
-  var cactus1 = createSprite(550, 175, 20, 20);
+  var cactus1 = createSprite(width, 175, 20, 20);
   cactus1.debug = true;
   cactus1.scale = 0.5;
   var x = Math.round(random(1, 6));
-  cactus1.lifetime = 120;
+  cactus1.lifetime = width/5;
   cactusGroup.add(cactus1);
   
   switch (x) {
@@ -208,7 +209,7 @@ cloudGroup.destroyEach();
 score = 0;
 gameover.visible = false;
 restart.visible = false;
-  
+trex.y = 163;
 
 }
 
